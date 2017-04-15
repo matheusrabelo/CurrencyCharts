@@ -1,0 +1,25 @@
+{
+    "extends": "google",
+    "installedESLint": true,
+    "env": {
+        "es6": true,
+        "browser": true
+    },
+    "rules": {
+        "require-jsdoc": "off",
+        "linebreak-style": "off",
+        "object-curly-spacing": "off",
+        "react/jsx-uses-vars": [2],
+        "react/jsx-uses-react": 2
+    },
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true
+        }
+    },
+    "plugins": [
+        "react"
+    ]
+}
