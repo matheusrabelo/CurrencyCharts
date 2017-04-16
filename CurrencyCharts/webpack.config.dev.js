@@ -26,6 +26,9 @@ export default {
             $: 'jquery',
             jquery: 'jquery',
         }),
+        new webpack.ProvidePlugin({
+            Highcharts: 'highcharts',
+        }),
     ],
     module: {
         loaders: [

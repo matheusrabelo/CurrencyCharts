@@ -2,6 +2,7 @@ import 'bootstrap-select/dist/css/bootstrap-select.min.css';
 import 'bootstrap-select/dist/js/bootstrap-select.min.js';
 
 import React from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -12,41 +13,52 @@ class CurrencySelector extends React.Component {
         super(props, context);
 
         this.state = {
-            currency: {
-                title: 'BRL',
-            },
+            currency: 'AED',
+            currencies: [],
         };
 
         // Changing reference for 'this' in methods
-        this.viewCurrency = this.viewCurrency.bind(this);
+        this.showCurrency = this.showCurrency.bind(this);
         this.changeCurrency = this.changeCurrency.bind(this);
     }
 
     changeCurrency(event) {
-        const { currency } = this.state;
-        currency.title = event.target.value;
+        const currency = event.target.value;
         this.setState({ currency });
     }
 
-    viewCurrency() {
-        this.props.showCurrency(this.state.currency);
+    showCurrency() {
+        this.props.actions.loadHistory(this.state.currency);
+    }
+
+    refreshCurrencyPicker() {
+        // refresh selectPicker
+        setTimeout(function() {
+            $('#currencyPicker').selectpicker('refresh');
+        }, 0);
     }
 
     render() {
+        this.refreshCurrencyPicker();
         return (
             <div>
                 <select
                     onChange={this.changeCurrency}
+                    id="currencyPicker"
                     className="selectpicker">
-                    <option> BRL </option>
-                    <option> USD </option>
-                    <option> EUR </option>
+                     {this.props.currencies.map((currency) =>
+                        <option
+                            key={currency.title.toString()}
+                            value={currency.title}>
+                            {currency.title} - {currency.name}
+                        </option>
+                     )}
                 </select>
                 <button
-                    style={style.viewCurrency}
-                    onClick={this.viewCurrency}
+                    style={style.showCurrency}
+                    onClick={this.showCurrency}
                     className="btn btn-primary">
-                    View Currency
+                    Show exchange rate
                 </button>
             </div>
         );
@@ -54,26 +66,24 @@ class CurrencySelector extends React.Component {
 }
 
 const style = {
-    viewCurrency: {
+    showCurrency: {
         marginLeft: '0.5em',
     },
 };
 
 CurrencySelector.propTypes = {
-    showCurrency: PropTypes.func.isRequired,
-    currency: PropTypes.array.isRequired,
+    actions: PropTypes.object.isRequired,
 };
 
 function mapStateToProps(state, ownProps) {
     return {
-        currency: state.currency,
+        currencies: state.currencies,
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        showCurrency: (currency) =>
-            dispatch(currencyActions.showCurrency(currency)),
+        actions: bindActionCreators(currencyActions, dispatch),
     };
 }
 
