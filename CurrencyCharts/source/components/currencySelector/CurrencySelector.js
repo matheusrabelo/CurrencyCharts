@@ -1,6 +1,3 @@
-import 'bootstrap-select/dist/css/bootstrap-select.min.css';
-import 'bootstrap-select/dist/js/bootstrap-select.min.js';
-
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';

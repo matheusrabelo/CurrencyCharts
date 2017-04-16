@@ -3,6 +3,8 @@ import 'babel-polyfill';
 import 'bootstrap/dist/js/bootstrap.min.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/css/bootstrap-theme.min.css';
+import 'bootstrap-select/dist/css/bootstrap-select.min.css';
+import 'bootstrap-select/dist/js/bootstrap-select.min.js';
 import 'highcharts/highcharts.js';
 
 import React from 'react';

@@ -10,7 +10,7 @@ import * as history from './mocks/history.json';
 
 function delay(value) {
     return new Promise((resolve) => {
-        setTimeout(() => resolve(value), 1000);
+        setTimeout(() => resolve(value), 300);
     });
 }
 
