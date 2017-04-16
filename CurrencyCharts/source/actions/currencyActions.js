@@ -15,7 +15,6 @@ export function loadCurrencies() {
     return function(dispatch) {
         return ExternalAPI.getCurrentSupportedCurrencies()
             .then((result) => {
-                // let currencies = Object.keys(result.currencies);
                 let currencies = [];
                 for (let key in result.currencies) {
                     if (result.currencies.hasOwnProperty(key)) {
@@ -25,7 +24,6 @@ export function loadCurrencies() {
                         });
                     }
                 }
-                debugger;
                 dispatch(loadCurrenciesSuccess(currencies));
             })
             .catch((error) => console.log(error));
@@ -33,7 +31,6 @@ export function loadCurrencies() {
 }
 
 export function loadHistory(currency) {
-    debugger;
     const finalDate = moment().format('YYYY-MM-DD');
     const startDate = moment(finalDate)
         .subtract(1, 'years')
