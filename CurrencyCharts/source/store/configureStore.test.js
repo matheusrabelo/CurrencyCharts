@@ -23,7 +23,7 @@ describe('store', () => {
         expect(actualCurrencies).to.be.deep.equal(currencies);
     });
 
-    it('should handle currencies actions ', () => {
+    it('should handle history actions ', () => {
         const history = ['history'];
         const action = currencyActions.loadHistorySuccess(history);
         store.dispatch(action);
