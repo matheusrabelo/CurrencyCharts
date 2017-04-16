@@ -2,31 +2,29 @@
 For a while, integration with external API will be mocked
 
 import axios from 'axios';
-import configuration from './configuration';
+import { EXTERNAL_API } from '../constants';
 */
 
 import * as supportedCurrencies from './mocks/supportedCurrencies.json';
-import * as exchangeRate from './mocks/exchangeRate.json';
-import * as historical from './mocks/historical.json';
+import * as history from './mocks/history.json';
 
 function delay(value) {
     return new Promise((resolve) => {
-        setTimeOut(
-            resolve(value)
-        , 1000);
+        setTimeout(() => resolve(value), 1000);
     });
 }
 
 class ExternalAPI {
-    getCurrentSupportedCurrencies() {
+    static getCurrentSupportedCurrencies() {
         return delay(supportedCurrencies);
     }
-    getExchangeRate() {
-        return delay(exchangeRate);
+
+    static getHistory(currency, startDate, finalDate) {
+        // keeping imuttable objects
+        const currencyHistory =
+            Object.assign({}, history, { source: currency });
+        return delay(currencyHistory);
     }
-    getHistorical(startDate, finalDate) {
-        return delay(historical);
-    }
-};
+}
 
 export default ExternalAPI;
