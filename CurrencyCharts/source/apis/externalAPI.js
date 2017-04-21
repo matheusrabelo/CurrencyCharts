@@ -1,29 +1,42 @@
-/*
-For a while, integration with external API will be mocked
-
 import axios from 'axios';
+import toastr from 'toastr';
+
 import { EXTERNAL_API } from '../constants';
-*/
-
-import * as supportedCurrencies from './mocks/supportedCurrencies.json';
-import * as history from './mocks/history.json';
-
-function delay(value) {
-    return new Promise((resolve) => {
-        setTimeout(() => resolve(value), 300);
-    });
-}
 
 class ExternalAPI {
-    static getCurrentSupportedCurrencies() {
-        return delay(supportedCurrencies);
+    constructor() {
+        this.axiosInstance = axios.create({
+            baseURL: EXTERNAL_API,
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8',
+            },
+        });
     }
 
-    static getHistory(currency, startDate, finalDate) {
-        // keeping imuttable objects
-        const currencyHistory =
-            Object.assign({}, history, { source: currency });
-        return delay(currencyHistory);
+    getCurrentSupportedCurrencies() {
+        return this.axiosInstance.get('/supportedCurrencies')
+            .then((result) => result.data)
+            .catch((error) => {
+                toastr.error(
+                    'Something went wrong while getting ' +
+                    'supported currencies list');
+                return error;
+            });
+    }
+
+    getHistory(currency, startDate, finalDate) {
+        return this.axiosInstance.get('/history', {
+            params: {
+                currency, startDate, finalDate,
+            },
+        })
+            .then((result) => result.data)
+            .catch((error) => {
+                toastr.error(
+                    'Something went wrong while getting ' +
+                    'currency history');
+                return error;
+            });
     }
 }
 
