@@ -15,15 +15,11 @@ export function loadCurrencies() {
     return function(dispatch) {
         return ExternalAPI.getCurrentSupportedCurrencies()
             .then((result) => {
-                let currencies = [];
-                for (let key in result.currencies) {
-                    if (result.currencies.hasOwnProperty(key)) {
-                            currencies.push({
-                            title: key,
-                            name: result.currencies[key],
-                        });
-                    }
-                }
+                const currencies = Object.keys(result.currencies)
+                    .map((title) => ({
+                        title,
+                        name: result.currencies[title],
+                    }));
                 dispatch(loadCurrenciesSuccess(currencies));
             })
             .catch((error) => console.log(error));
