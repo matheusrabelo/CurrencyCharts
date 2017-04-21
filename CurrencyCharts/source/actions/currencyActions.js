@@ -3,6 +3,8 @@ import moment from 'moment';
 import * as constants from '../constants';
 import ExternalAPI from '../apis/externalAPI';
 
+const externalAPI = new ExternalAPI();
+
 export function loadCurrenciesSuccess(currencies) {
     return { type: constants.LOAD_CURRENCIES_SUCCESS, currencies };
 }
@@ -13,7 +15,7 @@ export function loadHistorySuccess(history) {
 
 export function loadCurrencies() {
     return function(dispatch) {
-        return ExternalAPI.getCurrentSupportedCurrencies()
+        return externalAPI.getCurrentSupportedCurrencies()
             .then((result) => {
                 const currencies = Object.keys(result.currencies)
                     .map((title) => ({
@@ -29,10 +31,10 @@ export function loadCurrencies() {
 export function loadHistory(currency) {
     const finalDate = moment().format('YYYY-MM-DD');
     const startDate = moment(finalDate)
-        .subtract(1, 'years')
+        .subtract(1, 'weeks')
         .format('YYYY-MM-DD');
     return function(dispatch) {
-        return ExternalAPI.getHistory(currency, startDate, finalDate)
+        return externalAPI.getHistory(currency, startDate, finalDate)
             .then((result) =>
                 dispatch(loadHistorySuccess(result)))
             .catch((error) => console.log(error));

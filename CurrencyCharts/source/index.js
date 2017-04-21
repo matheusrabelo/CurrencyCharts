@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap-theme.min.css';
 import 'bootstrap-select/dist/css/bootstrap-select.min.css';
 import 'bootstrap-select/dist/js/bootstrap-select.min.js';
 import 'highcharts/highcharts.js';
+import 'toastr/build/toastr.min.css';
 
 import React from 'react';
 import { render } from 'react-dom';
