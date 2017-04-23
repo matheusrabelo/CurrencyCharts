@@ -1,5 +1,6 @@
 import webpack from 'webpack';
 import path from 'path';
+import process from 'process';
 
 export default {
     devtool: 'cheap-module-eval-source-map',
@@ -28,6 +29,11 @@ export default {
         }),
         new webpack.ProvidePlugin({
             Highcharts: 'highcharts',
+        }),
+        new webpack.ProvidePlugin({
+            'process.env': {
+                'EXTERNAL_API': JSON.stringify(process.env.EXTERNAL_API),
+            },
         }),
     ],
     module: {
