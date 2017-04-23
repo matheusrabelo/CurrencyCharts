@@ -26,13 +26,13 @@ export default {
             jQuery: 'jquery',
             $: 'jquery',
             jquery: 'jquery',
-        }),
-        new webpack.ProvidePlugin({
             Highcharts: 'highcharts',
         }),
-        new webpack.ProvidePlugin({
-            'process.env': {
-                'EXTERNAL_API': JSON.stringify(process.env.EXTERNAL_API),
+        new webpack.DefinePlugin({
+            process: {
+                env: {
+                    EXTERNAL_API: JSON.stringify(process.env.EXTERNAL_API),
+                },
             },
         }),
     ],
