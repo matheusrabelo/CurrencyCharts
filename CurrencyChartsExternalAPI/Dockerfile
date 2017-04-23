@@ -1,6 +1,6 @@
 FROM node:boron
 
-RUN	mkdir -p /currencychartsexternalapi
+RUN mkdir -p /currencychartsexternalapi
 WORKDIR /currencychartsexternalapi
 
 COPY . /currencychartsexternalapi
