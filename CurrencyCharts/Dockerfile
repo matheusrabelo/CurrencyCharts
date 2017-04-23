@@ -1,6 +1,6 @@
 FROM node:boron
 
-RUN	mkdir -p /currencycharts
+RUN mkdir -p /currencycharts
 WORKDIR /currencycharts
 
 COPY . /currencycharts
