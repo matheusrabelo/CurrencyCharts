@@ -1,7 +1,7 @@
 # Currency Charts
 
 ## About
-See the historical values of the main currencies.
+Shows you the historical values of the main currencies.
 
 ## How to use
 The following environment variables are necessary to configure this project:
@@ -24,20 +24,20 @@ $ npm run start
 Do the same (install and start) for CurrencyCharts folder.
 
 ## Run with Docker
-In the front-end app (CurrencyCharts), you can use:
+Run the Front-end app with:
 ```
 $ docker run -p 3000:3000 
              -e EXTERNAL_API=http://localhost:8088/v1
-             <container_name>
+             matheusrabelo/currency-charts
 ```
 
-In the back-end app (CurrencyChartsExternalAPI):
+Run the Back-end app with:
 ```
 $ docker run -p 8088:8088 
              -e CURRENCY_LAYER_API_URL=http://apilayer.net/api 
-             -e CURRENCY_LAYER_API_TOKEN=<your_apilayer_token> 
+             -e CURRENCY_LAYER_API_TOKEN=your_apilayer_token
              -e EXTERNAL_API_PORT=8088 
-             <container_name>
+             matheusrabelo/currency-charts-api
 ```
 
 ## How to test
